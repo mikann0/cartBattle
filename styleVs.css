@@ -3,7 +3,7 @@
     padding: 0;
 }
 
-.parent {
+.container {
     height: 100vh;
     display: grid;
     grid-template-columns: 2fr 3fr 1fr 3fr 2fr;
@@ -86,3 +86,17 @@ button {
     height: 60%;
     border-radius: 10px 10px 0px 0px;
 }
+
+h3{
+    margin: 5%;
+    font-size: 300%;
+    font-family: monospace;
+    color: white;
+    text-shadow:
+        1px 1px black,
+        -1px 1px black,
+        1px -1px black,
+        -1px -1px black,
+        1px 1px 5px #555;
+}
+
