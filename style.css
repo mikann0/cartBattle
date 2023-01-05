@@ -1,0 +1,89 @@
+*{
+    margin : 0;
+    padding : 0;
+}
+
+main{
+    height:100vh;
+}
+
+.parent {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1fr 3fr 1fr 3fr 1fr 3fr 1fr;
+    grid-template-rows: 1fr 5fr 1fr 5fr 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    }
+    
+.div1 { grid-area: 2 / 2 / 3 / 3; }
+.div2 { grid-area: 2 / 4 / 3 / 5; }
+.div3 { grid-area: 2 / 6 / 3 / 7; }
+.div4 { grid-area: 2 / 8 / 3 / 9; }
+.div5 { grid-area: 4 / 2 / 5 / 3; }
+.div6 { grid-area: 4 / 4 / 5 / 5; }
+.div7 { grid-area: 4 / 6 / 5 / 7; }
+.div8 { grid-area: 4 / 8 / 5 / 9; } 
+
+.card{
+    display: grid;
+    grid-template-rows: 1fr 5fr 1fr;
+    border: 2px black solid;
+    border-radius: 25px;
+}
+
+.cardName, .cardText{
+    text-align: center;
+}
+
+.cardImg{
+    border-top: 2px black solid;
+    border-bottom: 2px black solid;
+}
+
+.div1,.div5{
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.cardText{
+    display: flex;
+    
+}
+
+.damage{
+    width: 50%;
+    height : 100%;
+    border-right: 2px black solid;
+}
+
+.heal{
+    width: 50%;
+    height : 100%;
+}
+
+.card:nth-child(2)>:nth-child(2){
+    background-color: rgb(190, 164, 164);
+}
+.card:nth-child(3)>:nth-child(2){
+    background-color: rgb(70, 90, 117);
+}
+.card:nth-child(4)>:nth-child(2){
+    background-color: rgb(73, 38, 83);
+}
+.card:nth-child(6)>:nth-child(2){
+    background-color: rgb(138, 139, 77);
+}
+.card:nth-child(7)>:nth-child(2){
+    background-color: rgb(24, 14, 14);
+}
+.card:nth-child(8)>:nth-child(2){
+    background-color: rgb(43, 75, 54);
+}
+
+.cardNameTxt, .damage, .heal{
+    height:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
