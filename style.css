@@ -3,17 +3,24 @@
     padding : 0;
 }
 
-main{
+
+#ecran2
+{
+    /* background-color: red; */
+    background: url(img/background.png) no-repeat center center fixed;
+    background-size: cover;
     height:100vh;
 }
 
+
 .parent {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr 3fr 1fr 3fr 1fr 3fr 1fr;
+    grid-template-columns: 1fr 5fr 1fr 3fr 1fr 3fr 1fr 3fr 1fr;
     grid-template-rows: 1fr 5fr 1fr 5fr 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-    }
+    height:100%;
+}
     
 .div1 { grid-area: 2 / 2 / 3 / 3; }
 .div2 { grid-area: 2 / 4 / 3 / 5; }
@@ -24,22 +31,73 @@ main{
 .div7 { grid-area: 4 / 6 / 5 / 7; }
 .div8 { grid-area: 4 / 8 / 5 / 9; } 
 
-.card{
-    display: grid;
-    grid-template-rows: 1fr 5fr 1fr;
-    border: 2px black solid;
-    border-radius: 25px;
-    cursor: pointer;
+.div2,.div3,.div4,.div6,.div7,.div8{
+    display: flex;
+    justify-content: center;
 }
+
+.div2 .card{ background-color: rgb(190, 164, 164); }
+.div3 .card{ background-color: rgb(70, 90, 117); }
+.div4 .card{ background-color: rgb(73, 38, 83); }
+.div6 .card{ background-color: rgb(138, 139, 77); }
+.div7 .card{ background-color: rgb(59, 35, 35); }
+.div8 .card{ background-color: rgb(43, 75, 54); } 
 
 .cardName, .cardText{
     text-align: center;
+    height: 50px;
+    font-weight: bold;
+}
+
+.div1,.div5{
+    height: 100%;
+}
+
+.choose{
+    background-color: rgba(255, 255, 255, 0.288);
+    border-radius: 25px;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* display: grid;
+    grid-template-rows: 1fr 5fr 1fr; */
+    border: 2px black solid;
+    border-radius: 25px;
+    cursor: pointer;
+    height: min-content;
+    transition: ease-in-out 0.2s;
+
+}
+
+.card:hover{
+    transform: scale(1.1);
 }
 
 .cardImg{
     border-top: 2px black solid;
     border-bottom: 2px black solid;
+    height: auto
 }
+
+.divImg{
+    width:100%;
+    height: max-content;
+    width: 100%;
+}
+
+img{
+    position: relative;
+    width: 100%;
+    margin-bottom: -10px;
+    z-index: 99999;
+}
+
 
 .div1,.div5{
     display: flex;
@@ -49,7 +107,7 @@ main{
 
 .cardText{
     display: flex;
-    
+    width: 100%;
 }
 
 .damage{
@@ -63,24 +121,6 @@ main{
     height : 100%;
 }
 
-.card:nth-child(2)>:nth-child(2){
-    background-color: rgb(190, 164, 164);
-}
-.card:nth-child(3)>:nth-child(2){
-    background-color: rgb(70, 90, 117);
-}
-.card:nth-child(4)>:nth-child(2){
-    background-color: rgb(73, 38, 83);
-}
-.card:nth-child(6)>:nth-child(2){
-    background-color: rgb(138, 139, 77);
-}
-.card:nth-child(7)>:nth-child(2){
-    background-color: rgb(24, 14, 14);
-}
-.card:nth-child(8)>:nth-child(2){
-    background-color: rgb(43, 75, 54);
-}
 
 .cardNameTxt, .damage, .heal{
     height:100%;

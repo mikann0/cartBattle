@@ -1,98 +1,71 @@
 
 let listCard = [
     {
-        name : "1",
+        name : "Leader",
         attack : 12,
         heal : 2,
-        imgCard : ""
+        imgCard : "img/Leader.png"
     },
     {
-        name : "2",
+        name : "Trickster",
         attack : 10,
         heal : 4,
-        imgCard : ""
+        imgCard : "img/Trickster.png"
     },
     {
-        name : "3",
+        name : "Collector",
         attack : 8,
         heal : 6,
-        imgCard : ""
+        imgCard : "img/Collector.png"
     },
     {
-        name : "4",
+        name : "Saboteur",
         attack : 6,
         heal : 8,
-        imgCard : ""
+        imgCard : "img/Saboteur.png"
     },
     {
-        name : "5",
+        name : "Support",
         attack : 4,
         heal : 10,
-        imgCard : ""
+        imgCard : "img/Support.png"
     },
     {
-        name : "6",
+        name : "Enforcer",
         attack : 2,
         heal : 12,
-        imgCard : ""
+        imgCard : "img/Enforcer.png"
     }
 ]
 
-let chooseCard = document.querySelectorAll('.card');
-let cardname = document.querySelectorAll('.cardNameTxt');
-let damageNumber = document.querySelectorAll('.damage');
-let healNumber = document.querySelectorAll('.heal');
+const chooseCard = document.querySelectorAll('.card');
+const cardName = document.querySelectorAll('.cardNameTxt');
+const damageNumber = document.querySelectorAll('.damage');
+const healNumber = document.querySelectorAll('.heal');
+const cardImg = document.querySelectorAll('.cardImg');
 
-for (var i = 0; i < listCard.length; i++){
-    console.log(i)
-    console.log(listCard[i])
+let choixJoueur;
+let choixBot;
+
+for (let i = 0; i < listCard.length; i++){
     chooseCard[i].addEventListener('click', function(){
-        console.log(i)
         showCard(i)
     })
 }
 
 function showCard(i){
-    console.log(listCard[i])
+    console.log(listCard[i]);
+    choixJoueur = i;
+    choixBot = Math.floor(Math.random()*6);
+    console.log(choixJoueur);
+    console.log(choixBot);
 }
-
-
-
-
-
-
-
-
-
-// chooseCard[0].addEventListener('click', function(){
-//     showCard(0)})
-// chooseCard[1].addEventListener('click', function(){
-//     showCard(1)})
-// chooseCard[2].addEventListener('click', function(){
-//     showCard(2)})
-// chooseCard[3].addEventListener('click', function(){
-//     showCard(3)})
-// chooseCard[4].addEventListener('click', function(){
-//     showCard(4)})
-// chooseCard[5].addEventListener('click', function(){
-//     showCard(5)})
-
-
-
 
 
 
 for (let i = 0; i < listCard.length; i++) {
     damageNumber[i].textContent += listCard[i].attack   
     healNumber[i].textContent += listCard[i].heal   
-    cardname[i].textContent += listCard[i].name   
+    cardName[i].textContent += listCard[i].name   
+    cardImg[i].src = listCard[i].imgCard
 }
-
-// let a = 12
-
-
-// localStorage.setItem("cardChoisie",a);
-
-// let cat = localStorage.getItem(a);
-
-// console.log(cat)
