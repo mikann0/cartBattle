@@ -50,14 +50,18 @@ let heal = document.querySelector(".heal")
 let playerHealthLevel = 100
 let pcHealthLevel = 100
 
-let choixJoueur = 0
-let choixBot = 5
+let choixJoueur = 5
+let choixBot = 0
 
 // img[0].img.src = listCard[j].imgCard
 charactorName[0].textContent = listCard[choixBot].name
 
 // img[1].img.src = listCard[i].imgCard
 charactorName[1].textContent = listCard[choixJoueur].name
+
+
+
+
 
 
 // //pc choixJoueur 0
@@ -83,15 +87,17 @@ charactorName[1].textContent = listCard[choixJoueur].name
 //         //youLose
 //     }
 // }
-function Attack(level, x, y) {
+function Attack(level, x, y) { 
     level - listCard[x].attack
     if (level - listCard[x].attack > 0) {
         healthLevel[y].textContent = level - listCard[x].attack + " / 100"
+        bar[y].style.setProperty('--lifeWidth', level - listCard[x].attack+'%')
         console.log(level - listCard[x].attack)
         level -= listCard[x].attack
     } else {
         console.log("gagné "+x)
         healthLevel[y].textContent = "0 / 100"
+        bar[y].style.setProperty('--lifeWidth', '0%')
         level = 0
     }
     return level
@@ -125,9 +131,11 @@ function Heal(level, x, y) {
     level + listCard[x].heal
     if (level + listCard[x].heal >= 100) {
         healthLevel[y].textContent = "100 / 100"
+        bar[y].style.setProperty('--lifeWidth', '100%')
         level = 100
     } else {
         healthLevel[y].textContent = level + listCard[x].heal + " / 100"
+        bar[y].style.setProperty('--lifeWidth', level + listCard[x].heal+'%')
         level += listCard[x].heal
     }
     return level
@@ -135,8 +143,7 @@ function Heal(level, x, y) {
 
 
 function pc() {
-    // let number = Math.floor(Math.random() * 2 + 1)
-    let number = 1
+    let number = Math.floor(Math.random() * 2 + 1)
     if (number == 1) {
         playerHealthLevel=Attack(playerHealthLevel, choixBot, 1)
         console.log("attack")
