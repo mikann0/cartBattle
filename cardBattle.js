@@ -205,8 +205,8 @@ function pc() {
 }
 
 function youAttack() {
-    pc();
     pcHealthLevel=Attack(pcHealthLevel, choixJoueur, 0);
+    pc();
 }
 
 function youHeal() {
@@ -236,3 +236,4 @@ function testCrit(){
         return 1
     return 2
 }
+

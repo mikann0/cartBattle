@@ -67,10 +67,6 @@ h4{
     justify-content: center;
 }
 
-.vs{
-    color: white;
-}
-
 
 .card{
     display: flex;
@@ -158,6 +154,13 @@ img{
     display: flex;
     justify-content: center;
     align-items: center;
+    color: white;
+    text-shadow:
+    1px 1px black,
+    -1px 1px black,
+    1px -1px black,
+    -1px -1px black,
+    1px 1px 5px #555;
 }
 
 .cartPlayer {
@@ -294,5 +297,3 @@ h3{
     text-align: center;
     height: 100%;
 }
-
-
