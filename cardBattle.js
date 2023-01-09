@@ -112,12 +112,14 @@ function Attack(targetHealthLevel, cardInformation, cardIndex) {
     targetHealthLevel - listCard[cardInformation].attack
     if (targetHealthLevel - listCard[cardInformation].attack > 0) {
         healthLevel[cardIndex].textContent = targetHealthLevel - listCard[cardInformation].attack + " / 100"
+        bar[cardIndex].style.setProperty('--lifeWidth', targetHealthLevel - listCard[cardInformation].attack+'%')
         console.log(targetHealthLevel - listCard[cardInformation].attack)
         targetHealthLevel -= listCard[cardInformation].attack
     } else {
         console.log("gagné "+cardInformation)
         healthLevel[cardIndex].textContent = "0 / 100"
         targetHealthLevel = 0
+        bar[cardIndex].style.setProperty('--lifeWidth', '0%')
     }
     if(nbrLine>5)
         cleanText()
@@ -136,9 +138,11 @@ function Heal(ownHealthLevel, cardInformation, cardIndex) {
     if (ownHealthLevel + listCard[cardInformation].heal >= 100) {
         healthLevel[cardIndex].textContent = "100 / 100"
         ownHealthLevel = 100
+        bar[cardIndex].style.setProperty('--lifeWidth', '100%')
     } else {
         healthLevel[cardIndex].textContent = ownHealthLevel + listCard[cardInformation].heal + " / 100"
         ownHealthLevel += listCard[cardInformation].heal
+        bar[cardIndex].style.setProperty('--lifeWidth', ownHealthLevel + listCard[cardInformation].heal+'%')
     }
     if(nbrLine>5)
         cleanText()
