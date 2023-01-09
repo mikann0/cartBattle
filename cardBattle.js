@@ -84,9 +84,7 @@ recommencer.addEventListener("click", function() {
 
 for(let i = 0; i < listCard.length; i++){
     afficheCardProperties(i)
-    chooseCard[i].addEventListener('click', function(){
-        showCard(i)
-    })
+    chooseCard[i].addEventListener('click', () => showCard(i))
 }
 
 function afficheCardProperties(i){
