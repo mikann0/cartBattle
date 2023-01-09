@@ -45,13 +45,6 @@
     justify-content: center;
 }
 
-.div2 .card{ background-color: rgb(190, 164, 164); }
-.div3 .card{ background-color: rgb(70, 90, 117); }
-.div4 .card{ background-color: rgb(73, 38, 83); }
-.div6 .card{ background-color: rgb(138, 139, 77); }
-.div7 .card{ background-color: rgb(59, 35, 35); }
-.div8 .card{ background-color: rgb(43, 75, 54); } 
-
 .cardName, .cardText{
     text-align: center;
     height: 50px;
@@ -60,6 +53,10 @@
 
 .div1,.div5{
     height: 100%;
+}
+
+h4{
+    padding: 5px;
 }
 
 .choose{
@@ -171,6 +168,7 @@ img{
 .lastInfo { 
     grid-area: 4 / 2 / 5 / 5; 
     background-color: rgba(255, 255, 255, 0.288);
+    border-radius: 25px;
 } 
 
 .cartPc,

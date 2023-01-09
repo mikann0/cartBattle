@@ -2,43 +2,43 @@
 let listCard = [
     {
         name : "Leader",
-        attack : 12,
-        heal : 2,
+        attack : [8,10],
+        heal : [0,2],
         imgCard : "img/Leader.png",
         bg : "rgb(190, 164, 164)"
     },
     {
         name : "Trickster",
-        attack : 10,
-        heal : 4,
+        attack : [10,12],
+        heal : [2,4],
         imgCard : "img/Trickster.png",
         bg : "rgb(70, 90, 117)"
     },
     {
         name : "Collector",
-        attack : 8,
-        heal : 6,
+        attack : [6,8],
+        heal : [8,10],
         imgCard : "img/Collector.png",
         bg : "rgb(73, 38, 83)"
     },
     {
         name : "Saboteur",
-        attack : 6,
-        heal : 8,
+        attack : [12,14],
+        heal : [1,3],
         imgCard : "img/Saboteur.png",
         bg : "rgb(138, 139, 77)"
     },
     {
         name : "Support",
-        attack : 4,
-        heal : 10,
+        attack : [2,4],
+        heal : [10,12],
         imgCard : "img/Support.png",
-        bg : "rgb(59, 35, 35)"
+        bg : "rgb(88, 55, 55)"
     },
     {
         name : "Enforcer",
-        attack : 2,
-        heal : 12,
+        attack : [13,15],
+        heal : [0,1],
         imgCard : "img/Enforcer.png",
         bg : "rgb(43, 75, 54)"
     }
@@ -81,8 +81,8 @@ for (let i = 0; i < listCard.length; i++){
 
 function afficheCardProperties(i){
     chooseCard[i].style.backgroundColor = listCard[i].bg  
-    damageNumber[i].textContent += listCard[i].attack   
-    healNumber[i].textContent += listCard[i].heal   
+    damageNumber[i].textContent += listCard[i].attack[0]+"/"+listCard[i].attack[1] 
+    healNumber[i].textContent += listCard[i].heal[0]+"/"+listCard[i].heal[1]
     cardName[i].textContent += listCard[i].name   
     cardImg[i].src = listCard[i].imgCard
 }
@@ -111,25 +111,29 @@ function showCard(i){
 
 
 function Attack(targetHealthLevel, cardInformation, cardIndex) {
-    targetHealthLevel - listCard[cardInformation].attack
-    if (targetHealthLevel - listCard[cardInformation].attack > 0) {
-        healthLevel[cardIndex].textContent = targetHealthLevel - listCard[cardInformation].attack + " / 100"
-        bar[cardIndex].style.setProperty('--lifeWidth', targetHealthLevel - listCard[cardInformation].attack+'%')
-        console.log(targetHealthLevel - listCard[cardInformation].attack)
-        targetHealthLevel -= listCard[cardInformation].attack
+    let randAttack = randomMinMax(listCard[cardInformation].attack[0],listCard[cardInformation].attack[1])
+    let calculHealth = targetHealthLevel - randAttack
+    
+    if (calculHealth > 0) {
+        healthLevel[cardIndex].textContent = calculHealth + " / 100"
+        bar[cardIndex].style.setProperty('--lifeWidth', calculHealth+'%')
+        // console.log(targetHealthLevel - randAttack)
+        targetHealthLevel -= randAttack
     } else {
         console.log("gagné "+cardInformation,cardIndex)
         healthLevel[cardIndex].textContent = "0 / 100"
-        targetHealthLevel = 0
         bar[cardIndex].style.setProperty('--lifeWidth', '0%')
-        gagner(cardInformation,cardIndex)
+        targetHealthLevel = 0
+        // gagner(cardInformation,cardIndex)
     }
+
     if(nbrLine>5)
         cleanText()
     if(cardIndex==0)
-        lastInfo.textContent += "Joueur attaque pour "+listCard[cardInformation].attack
+        lastInfo.textContent += "Joueur attaque pour "+randAttack
     else
-        lastInfo.textContent += "Ordinateur attaque pour "+listCard[cardInformation].attack
+        lastInfo.textContent += "Ordinateur attaque pour "+randAttack
+
     lastInfo.textContent += '\n'
     nbrLine++
     return targetHealthLevel
@@ -142,22 +146,27 @@ function gagner(cardInformation,cardIndex){
 
 
 function Heal(ownHealthLevel, cardInformation, cardIndex) {
-    ownHealthLevel + listCard[cardInformation].heal
-    if (ownHealthLevel + listCard[cardInformation].heal >= 100) {
+    let randHeal = randomMinMax(listCard[cardInformation].heal[0],listCard[cardInformation].heal[1])
+    let calculHealth = ownHealthLevel + randHeal
+    console.log(calculHealth,"+",randHeal,"jj",cardIndex)
+
+    if (calculHealth >= 100) {
         healthLevel[cardIndex].textContent = "100 / 100"
-        ownHealthLevel = 100
         bar[cardIndex].style.setProperty('--lifeWidth', '100%')
+        ownHealthLevel = 100
     } else {
-        healthLevel[cardIndex].textContent = ownHealthLevel + listCard[cardInformation].heal + " / 100"
-        ownHealthLevel += listCard[cardInformation].heal
-        bar[cardIndex].style.setProperty('--lifeWidth', ownHealthLevel + listCard[cardInformation].heal+'%')
+        ownHealthLevel = calculHealth
+        healthLevel[cardIndex].textContent = calculHealth + " / 100"
+        bar[cardIndex].style.setProperty('--lifeWidth', calculHealth+'%')
     }
+
     if(nbrLine>5)
         cleanText()
     if(cardIndex==0)
-        lastInfo.textContent += "Ordinateur se soigne pour "+listCard[cardInformation].heal
+        lastInfo.textContent += "Ordinateur se soigne pour "+randHeal
     else
-        lastInfo.textContent += "Joueur se soigne pour "+listCard[cardInformation].heal
+        lastInfo.textContent += "Joueur se soigne pour "+randHeal
+
     lastInfo.textContent += '\n'
     nbrLine++
     return ownHealthLevel
@@ -168,24 +177,19 @@ function pc() {
     let number = Math.floor(Math.random() * 2 + 1)
     if (number == 1) {
         playerHealthLevel=Attack(playerHealthLevel, choixBot, 1)
-        console.log("attack")
     } else {
         pcHealthLevel=Heal(pcHealthLevel, choixBot, 0)
-        console.log("heal")
     }
-    return playerHealthLevel;
 }
 
 function youAttack() {
+    pc();
     pcHealthLevel=Attack(pcHealthLevel, choixJoueur, 0);
-    playerHealthLevel = pc()
-    // setTimeout(pc, 2*1000);
 }
 
 function youHeal() {
     playerHealthLevel=Heal(playerHealthLevel, choixJoueur, 1);
-    pcHealthLevel = pc()
-    // setTimeout(pc, 2*1000);
+    pc()
 }
 
 function cleanText(){
@@ -195,3 +199,8 @@ function cleanText(){
 
 attack.addEventListener("click",youAttack)
 heal3.addEventListener("click",youHeal)
+
+
+function randomMinMax(min,max){
+    return Math.floor(Math.random()*(max-min+1)+min)
+}
