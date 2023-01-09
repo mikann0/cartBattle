@@ -50,35 +50,35 @@ let heal = document.querySelector(".heal")
 let playerHealthLevel = 100
 let pcHealthLevel = 100
 
-let i = 5
-let j = 3
+let choixJoueur = 0
+let choixBot = 5
 
 // img[0].img.src = listCard[j].imgCard
-charactorName[0].textContent = listCard[j].name
+charactorName[0].textContent = listCard[choixBot].name
 
 // img[1].img.src = listCard[i].imgCard
-charactorName[1].textContent = listCard[i].name
+charactorName[1].textContent = listCard[choixJoueur].name
 
 
-// //pc i 0
+// //pc choixJoueur 0
 // function playerAttack() {
-//     pcHealthLevel - listCard[i].attack
-//     if(pcHealthLevel - listCard[i].attack>0){
-//     healthLevel[0].textContent = pcHealthLevel - listCard[i].attack + " / 100"
-//     console.log(pcHealthLevel - listCard[i].attack)
-//     pcHealthLevel -= listCard[i].attack
+//     pcHealthLevel - listCard[choixJoueur].attack
+//     if(pcHealthLevel - listCard[choixJoueur].attack>0){
+//     healthLevel[0].textContent = pcHealthLevel - listCard[choixJoueur].attack + " / 100"
+//     console.log(pcHealthLevel - listCard[choixJoueur].attack)
+//     pcHealthLevel -= listCard[choixJoueur].attack
 //     }else{
 //         //youWin
 //     }
 // }
 
-// //player j 1
+// //player choixBot 1
 // function pcAttack() {
-//     playerHealthLevel - listCard[j].attack
-//     if(playerHealthLevel - listCard[j].attack>0){
-//     healthLevel[1].textContent = playerHealthLevel - listCard[j].attack + " / 100"
-//     console.log(playerHealthLevel - listCard[j].attack)
-//     playerHealthLevel -= listCard[j].attack
+//     playerHealthLevel - listCard[choixBot].attack
+//     if(playerHealthLevel - listCard[choixBot].attack>0){
+//     healthLevel[1].textContent = playerHealthLevel - listCard[choixBot].attack + " / 100"
+//     console.log(playerHealthLevel - listCard[choixBot].attack)
+//     playerHealthLevel -= listCard[choixBot].attack
 //     }else{
 //         //youLose
 //     }
@@ -90,31 +90,34 @@ function Attack(level, x, y) {
         console.log(level - listCard[x].attack)
         level -= listCard[x].attack
     } else {
-        //fini
+        console.log("gagné "+x)
+        healthLevel[y].textContent = "0 / 100"
+        level = 0
     }
+    return level
 }
 
-// //player i 1
+// //player choixJoueur 1
 // function playerHeal() {
-//     playerHealthLevel + listCard[i].heal
-//     if (playerHealthLevel + listCard[i].heal >= 100) {
+//     playerHealthLevel + listCard[choixJoueur].heal
+//     if (playerHealthLevel + listCard[choixJoueur].heal >= 100) {
 //         healthLevel[1].textContent = "100 / 100"
 //         playerHealthLevel  = 100
 //     } else {
-//         healthLevel[1].textContent = playerHealthLevel + listCard[i].heal + " / 100"
-//         playerHealthLevel =+ listCard[i].heal
+//         healthLevel[1].textContent = playerHealthLevel + listCard[choixJoueur].heal + " / 100"
+//         playerHealthLevel =+ listCard[choixJoueur].heal
 //     }
 // }
 
 // // pc j 0 
 // function pcHeal() {
-//     pcHealthLevel + listCard[j].heal
-//     if (pcHealthLevel + listCard[j].heal >= 100) {
+//     pcHealthLevel + listCard[choixBot].heal
+//     if (pcHealthLevel + listCard[choixBot].heal >= 100) {
 //         healthLevel[0].textContent = "100 / 100"
 //         pcHealthLevel = 100
 //     } else {
-//         healthLevel[0].textContent = pcHealthLevel + listCard[j].heal + " / 100"
-//         pcHealthLevel += listCard[j].heal
+//         healthLevel[0].textContent = pcHealthLevel + listCard[choixBot].heal + " / 100"
+//         pcHealthLevel += listCard[choixBot].heal
 //     }
 // }
 
@@ -127,25 +130,29 @@ function Heal(level, x, y) {
         healthLevel[y].textContent = level + listCard[x].heal + " / 100"
         level += listCard[x].heal
     }
+    return level
 }
 
 
 function pc() {
-    let number = Math.floor(Math.random() * 2 + 1)
+    // let number = Math.floor(Math.random() * 2 + 1)
+    let number = 1
     if (number == 1) {
-        Attack(playerHealthLevel, j, 1);
+        playerHealthLevel=Attack(playerHealthLevel, choixBot, 1)
+        console.log("attack")
     } else {
-        Heal(pcHealthLevel, j, 0)
+        pcHealthLevel=Heal(pcHealthLevel, choixBot, 0)
+        console.log("heal")
     }
 }
 
 function youAttack() {
-    Attack(pcHealthLevel, i, 0);
+    pcHealthLevel=Attack(pcHealthLevel, choixJoueur, 0);
     setTimeout(pc, 2*1000);
 }
 
 function youHeal() {
-    Heal(playerHealthLevel, i, 1);
+    playerHealthLevel=Heal(playerHealthLevel, choixJoueur, 1);
     setTimeout(pc, 2*1000);
 }
 
