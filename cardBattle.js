@@ -90,7 +90,9 @@ function afficheCardProperties(i){
 function showCard(i){
     console.log(listCard[i]);
     choixJoueur = i;
-    choixBot = Math.floor(Math.random()*6);
+    do{
+        choixBot = Math.floor(Math.random()*6);
+    }while (choixBot==choixJoueur)
     console.log(choixJoueur);
     console.log(choixBot);
     
@@ -116,10 +118,11 @@ function Attack(targetHealthLevel, cardInformation, cardIndex) {
         console.log(targetHealthLevel - listCard[cardInformation].attack)
         targetHealthLevel -= listCard[cardInformation].attack
     } else {
-        console.log("gagné "+cardInformation)
+        console.log("gagné "+cardInformation,cardIndex)
         healthLevel[cardIndex].textContent = "0 / 100"
         targetHealthLevel = 0
         bar[cardIndex].style.setProperty('--lifeWidth', '0%')
+        gagner(cardInformation,cardIndex)
     }
     if(nbrLine>5)
         cleanText()
@@ -130,6 +133,11 @@ function Attack(targetHealthLevel, cardInformation, cardIndex) {
     lastInfo.textContent += '\n'
     nbrLine++
     return targetHealthLevel
+}
+
+function gagner(cardInformation,cardIndex){
+    //style display block
+
 }
 
 
