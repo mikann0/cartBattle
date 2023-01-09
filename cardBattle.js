@@ -1,39 +1,41 @@
+console.log("😊")
+
 let listCard = [
     {
-        name: "1",
+        name: "Leader",
         attack: 12,
         heal: 2,
-        imgCard: ""
+        imgCard: "img/Leader.png"
     },
     {
-        name: "2",
+        name: "Trickster",
         attack: 10,
         heal: 4,
-        imgCard: ""
+        imgCard: "img/Trickster.png"
     },
     {
-        name: "3",
+        name: "Collector",
         attack: 8,
         heal: 6,
-        imgCard: ""
+        imgCard: "img/Collector.png"
     },
     {
-        name: "4",
+        name: "Saboteur",
         attack: 6,
         heal: 8,
-        imgCard: ""
+        imgCard: "img/Saboteur.png"
     },
     {
-        name: "5",
+        name: "Support",
         attack: 4,
         heal: 10,
-        imgCard: ""
+        imgCard: "img/Support.png"
     },
     {
-        name: "6",
+        name: "Enforcer",
         attack: 2,
         heal: 12,
-        imgCard: ""
+        imgCard: "img/Enforcer.png"
     }
 ]
 
@@ -48,71 +50,104 @@ let heal = document.querySelector(".heal")
 let playerHealthLevel = 100
 let pcHealthLevel = 100
 
-img[0].img.src = "listCard[*].imgCard"
-charactorName[0].textContent = "listCard[*].name"
+let i = 5
+let j = 3
 
-img[1].img.src = "listCard[*].imgCard"
-charactorName[1].textContent = "listCard[*].name"
+// img[0].img.src = listCard[j].imgCard
+charactorName[0].textContent = listCard[j].name
 
-attack.addEventListener("click", playerAttack)
-heal.addEventListener("click", playerHeal)
+// img[1].img.src = listCard[i].imgCard
+charactorName[1].textContent = listCard[i].name
 
 
-function playerAttack() {
-    healthLevel[0].textContent = pcHealthLevel - listCard[*].attack + " / 100"
-    console.log(pcHealthLevel - listCard[*].attack)
-}
+// //pc i 0
+// function playerAttack() {
+//     pcHealthLevel - listCard[i].attack
+//     if(pcHealthLevel - listCard[i].attack>0){
+//     healthLevel[0].textContent = pcHealthLevel - listCard[i].attack + " / 100"
+//     console.log(pcHealthLevel - listCard[i].attack)
+//     pcHealthLevel -= listCard[i].attack
+//     }else{
+//         //youWin
+//     }
+// }
 
-function playerHeal() {
-    if (playerHealthLevel + listCard[*].heal >= 100) {
-        healthLevel[1].textContent = "100 / 100"
+// //player j 1
+// function pcAttack() {
+//     playerHealthLevel - listCard[j].attack
+//     if(playerHealthLevel - listCard[j].attack>0){
+//     healthLevel[1].textContent = playerHealthLevel - listCard[j].attack + " / 100"
+//     console.log(playerHealthLevel - listCard[j].attack)
+//     playerHealthLevel -= listCard[j].attack
+//     }else{
+//         //youLose
+//     }
+// }
+function Attack(level, x, y) {
+    level - listCard[x].attack
+    if (level - listCard[x].attack > 0) {
+        healthLevel[y].textContent = level - listCard[x].attack + " / 100"
+        console.log(level - listCard[x].attack)
+        level -= listCard[x].attack
     } else {
-        healthLevel[1].textContent = playerHealthLevel + listCard[*].heal + " / 100"
-
+        //fini
     }
 }
 
-function pcAttack() {
-    healthLevel[1].textContent = playerHealthLevel - listCard[*].attack + " / 100"
-    console.log(pcHealthLevel - listCard[*].attack)
-}
+// //player i 1
+// function playerHeal() {
+//     playerHealthLevel + listCard[i].heal
+//     if (playerHealthLevel + listCard[i].heal >= 100) {
+//         healthLevel[1].textContent = "100 / 100"
+//         playerHealthLevel  = 100
+//     } else {
+//         healthLevel[1].textContent = playerHealthLevel + listCard[i].heal + " / 100"
+//         playerHealthLevel =+ listCard[i].heal
+//     }
+// }
 
-function pcHeal() {
-    if (pcHealthLevel + listCard[*].heal >= 0) {
-        healthLevel[0].textContent = "100 / 100"
+// // pc j 0 
+// function pcHeal() {
+//     pcHealthLevel + listCard[j].heal
+//     if (pcHealthLevel + listCard[j].heal >= 100) {
+//         healthLevel[0].textContent = "100 / 100"
+//         pcHealthLevel = 100
+//     } else {
+//         healthLevel[0].textContent = pcHealthLevel + listCard[j].heal + " / 100"
+//         pcHealthLevel += listCard[j].heal
+//     }
+// }
+
+function Heal(level, x, y) {
+    level + listCard[x].heal
+    if (level + listCard[x].heal >= 100) {
+        healthLevel[y].textContent = "100 / 100"
+        level = 100
     } else {
-        healthLevel[0].textContent = pcHealthLevel + listCard[*].heal + " / 100"
+        healthLevel[y].textContent = level + listCard[x].heal + " / 100"
+        level += listCard[x].heal
     }
 }
 
 
-    function pc() {
-        let number = Math.floor(Math.random() * 2 + 1)
-        if (number == 1) {
-            pcAttack()
-        } else {
-            pcHeal()
-        }
+function pc() {
+    let number = Math.floor(Math.random() * 2 + 1)
+    if (number == 1) {
+        Attack(playerHealthLevel, j, 1);
+    } else {
+        Heal(pcHealthLevel, j, 0)
     }
+}
 
-    function youAttack() {
-        playerAttack()
-        if (playerHealthLevel == 0 || pcHealthLevel == 0) {
-            // fini
-        }
-        if (playerHealthLevel != 0 && pcHealthLevel != 0) {
-            // continue
-            pc()
-        }
-    }
+function youAttack() {
+    Attack(pcHealthLevel, i, 0);
+    setTimeout(pc, 2*1000);
+}
 
-    function youHeal() {
-        playerHeal()
-        if (playerHealthLevel == 0 || pcHealthLevel == 0) {
-            // fini
-        }
-        if (playerHealthLevel != 0 && pcHealthLevel != 0) {
-            // continue
-            pc()
-        }
-    }
+function youHeal() {
+    Heal(playerHealthLevel, i, 1);
+    setTimeout(pc, 2*1000);
+}
+
+attack.addEventListener("click",youAttack)
+heal.addEventListener("click",youHeal)
