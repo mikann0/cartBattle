@@ -1,144 +1,166 @@
-console.log("😊")
 
 let listCard = [
     {
-        name: "Leader",
-        attack: 12,
-        heal: 2,
-        imgCard: "img/Leader.png"
+        name : "Leader",
+        attack : 12,
+        heal : 2,
+        imgCard : "img/Leader.png",
+        bg : "rgb(190, 164, 164)"
     },
     {
-        name: "Trickster",
-        attack: 10,
-        heal: 4,
-        imgCard: "img/Trickster.png"
+        name : "Trickster",
+        attack : 10,
+        heal : 4,
+        imgCard : "img/Trickster.png",
+        bg : "rgb(70, 90, 117)"
     },
     {
-        name: "Collector",
-        attack: 8,
-        heal: 6,
-        imgCard: "img/Collector.png"
+        name : "Collector",
+        attack : 8,
+        heal : 6,
+        imgCard : "img/Collector.png",
+        bg : "rgb(73, 38, 83)"
     },
     {
-        name: "Saboteur",
-        attack: 6,
-        heal: 8,
-        imgCard: "img/Saboteur.png"
+        name : "Saboteur",
+        attack : 6,
+        heal : 8,
+        imgCard : "img/Saboteur.png",
+        bg : "rgb(138, 139, 77)"
     },
     {
-        name: "Support",
-        attack: 4,
-        heal: 10,
-        imgCard: "img/Support.png"
+        name : "Support",
+        attack : 4,
+        heal : 10,
+        imgCard : "img/Support.png",
+        bg : "rgb(59, 35, 35)"
     },
     {
-        name: "Enforcer",
-        attack: 2,
-        heal: 12,
-        imgCard: "img/Enforcer.png"
+        name : "Enforcer",
+        attack : 2,
+        heal : 12,
+        imgCard : "img/Enforcer.png",
+        bg : "rgb(43, 75, 54)"
     }
 ]
 
+const chooseCard = document.querySelectorAll('.card');
+const cardName = document.querySelectorAll('.cardNameTxt');
+const damageNumber = document.querySelectorAll('.damage');
+const healNumber = document.querySelectorAll('.heal');
+const cardImg = document.querySelectorAll('.cardImg');
+const ecran1 = document.querySelector('#ecran1');
+const ecran2 = document.querySelector('#ecran2');
+const lastInfo = document.querySelector('.textLastInfo')
 
-let img = document.querySelectorAll("img")
+let cartPc = document.querySelector(".cartPc")
+let cartPlayer = document.querySelector(".cartPlayer")
+
+let imgVs = document.querySelectorAll(".imgVs")
 let charactorName = document.querySelectorAll(".divName h2")
 let bar = document.querySelectorAll(".healthBar")
 let healthLevel = document.querySelectorAll(".healthBar p")
-let attack = document.querySelector(".attack")
-let heal = document.querySelector(".heal")
+let attack = document.querySelector(".attack2")
+let heal3 = document.querySelector(".heal3")
 
 let playerHealthLevel = 100
 let pcHealthLevel = 100
 
-let choixJoueur = 5
-let choixBot = 0
+let nbrLine = 0;
 
-// img[0].img.src = listCard[j].imgCard
-charactorName[0].textContent = listCard[choixBot].name
-
-// img[1].img.src = listCard[i].imgCard
-charactorName[1].textContent = listCard[choixJoueur].name
+let choixJoueur;
+let choixBot;
 
 
-
-
-
-
-// //pc choixJoueur 0
-// function playerAttack() {
-//     pcHealthLevel - listCard[choixJoueur].attack
-//     if(pcHealthLevel - listCard[choixJoueur].attack>0){
-//     healthLevel[0].textContent = pcHealthLevel - listCard[choixJoueur].attack + " / 100"
-//     console.log(pcHealthLevel - listCard[choixJoueur].attack)
-//     pcHealthLevel -= listCard[choixJoueur].attack
-//     }else{
-//         //youWin
-//     }
-// }
-
-// //player choixBot 1
-// function pcAttack() {
-//     playerHealthLevel - listCard[choixBot].attack
-//     if(playerHealthLevel - listCard[choixBot].attack>0){
-//     healthLevel[1].textContent = playerHealthLevel - listCard[choixBot].attack + " / 100"
-//     console.log(playerHealthLevel - listCard[choixBot].attack)
-//     playerHealthLevel -= listCard[choixBot].attack
-//     }else{
-//         //youLose
-//     }
-// }
-function Attack(level, x, y) { 
-    level - listCard[x].attack
-    if (level - listCard[x].attack > 0) {
-        healthLevel[y].textContent = level - listCard[x].attack + " / 100"
-        bar[y].style.setProperty('--lifeWidth', level - listCard[x].attack+'%')
-        console.log(level - listCard[x].attack)
-        level -= listCard[x].attack
-    } else {
-        console.log("gagné "+x)
-        healthLevel[y].textContent = "0 / 100"
-        bar[y].style.setProperty('--lifeWidth', '0%')
-        level = 0
-    }
-    return level
+for (let i = 0; i < listCard.length; i++){
+    afficheCardProperties(i)
+    chooseCard[i].addEventListener('click', function(){
+        showCard(i)
+    })
 }
 
-// //player choixJoueur 1
-// function playerHeal() {
-//     playerHealthLevel + listCard[choixJoueur].heal
-//     if (playerHealthLevel + listCard[choixJoueur].heal >= 100) {
-//         healthLevel[1].textContent = "100 / 100"
-//         playerHealthLevel  = 100
-//     } else {
-//         healthLevel[1].textContent = playerHealthLevel + listCard[choixJoueur].heal + " / 100"
-//         playerHealthLevel =+ listCard[choixJoueur].heal
-//     }
-// }
+function afficheCardProperties(i){
+    chooseCard[i].style.backgroundColor = listCard[i].bg  
+    damageNumber[i].textContent += listCard[i].attack   
+    healNumber[i].textContent += listCard[i].heal   
+    cardName[i].textContent += listCard[i].name   
+    cardImg[i].src = listCard[i].imgCard
+}
 
-// // pc j 0 
-// function pcHeal() {
-//     pcHealthLevel + listCard[choixBot].heal
-//     if (pcHealthLevel + listCard[choixBot].heal >= 100) {
-//         healthLevel[0].textContent = "100 / 100"
-//         pcHealthLevel = 100
-//     } else {
-//         healthLevel[0].textContent = pcHealthLevel + listCard[choixBot].heal + " / 100"
-//         pcHealthLevel += listCard[choixBot].heal
-//     }
-// }
+function showCard(i){
+    console.log(listCard[i]);
+    choixJoueur = i;
+    do{
+        choixBot = Math.floor(Math.random()*6);
+    }while (choixBot==choixJoueur)
+    console.log(choixJoueur);
+    console.log(choixBot);
+    
+    charactorName[0].textContent = listCard[choixBot].name
+    charactorName[1].textContent = listCard[choixJoueur].name
 
-function Heal(level, x, y) {
-    level + listCard[x].heal
-    if (level + listCard[x].heal >= 100) {
-        healthLevel[y].textContent = "100 / 100"
-        bar[y].style.setProperty('--lifeWidth', '100%')
-        level = 100
+    imgVs[0].src = listCard[choixBot].imgCard
+    imgVs[1].src = listCard[choixJoueur].imgCard
+
+    ecran1.style.display = 'none'
+    ecran2.style.display = 'block'
+
+    cartPc.style.backgroundColor = listCard[choixBot].bg
+    cartPlayer.style.backgroundColor = listCard[choixJoueur].bg
+}
+
+
+function Attack(targetHealthLevel, cardInformation, cardIndex) {
+    targetHealthLevel - listCard[cardInformation].attack
+    if (targetHealthLevel - listCard[cardInformation].attack > 0) {
+        healthLevel[cardIndex].textContent = targetHealthLevel - listCard[cardInformation].attack + " / 100"
+        bar[cardIndex].style.setProperty('--lifeWidth', targetHealthLevel - listCard[cardInformation].attack+'%')
+        console.log(targetHealthLevel - listCard[cardInformation].attack)
+        targetHealthLevel -= listCard[cardInformation].attack
     } else {
-        healthLevel[y].textContent = level + listCard[x].heal + " / 100"
-        bar[y].style.setProperty('--lifeWidth', level + listCard[x].heal+'%')
-        level += listCard[x].heal
+        console.log("gagné "+cardInformation,cardIndex)
+        healthLevel[cardIndex].textContent = "0 / 100"
+        targetHealthLevel = 0
+        bar[cardIndex].style.setProperty('--lifeWidth', '0%')
+        gagner(cardInformation,cardIndex)
     }
-    return level
+    if(nbrLine>5)
+        cleanText()
+    if(cardIndex==0)
+        lastInfo.textContent += "Joueur attaque pour "+listCard[cardInformation].attack
+    else
+        lastInfo.textContent += "Ordinateur attaque pour "+listCard[cardInformation].attack
+    lastInfo.textContent += '\n'
+    nbrLine++
+    return targetHealthLevel
+}
+
+function gagner(cardInformation,cardIndex){
+    //style display block
+
+}
+
+
+function Heal(ownHealthLevel, cardInformation, cardIndex) {
+    ownHealthLevel + listCard[cardInformation].heal
+    if (ownHealthLevel + listCard[cardInformation].heal >= 100) {
+        healthLevel[cardIndex].textContent = "100 / 100"
+        ownHealthLevel = 100
+        bar[cardIndex].style.setProperty('--lifeWidth', '100%')
+    } else {
+        healthLevel[cardIndex].textContent = ownHealthLevel + listCard[cardInformation].heal + " / 100"
+        ownHealthLevel += listCard[cardInformation].heal
+        bar[cardIndex].style.setProperty('--lifeWidth', ownHealthLevel + listCard[cardInformation].heal+'%')
+    }
+    if(nbrLine>5)
+        cleanText()
+    if(cardIndex==0)
+        lastInfo.textContent += "Ordinateur se soigne pour "+listCard[cardInformation].heal
+    else
+        lastInfo.textContent += "Joueur se soigne pour "+listCard[cardInformation].heal
+    lastInfo.textContent += '\n'
+    nbrLine++
+    return ownHealthLevel
 }
 
 
@@ -151,17 +173,25 @@ function pc() {
         pcHealthLevel=Heal(pcHealthLevel, choixBot, 0)
         console.log("heal")
     }
+    return playerHealthLevel;
 }
 
 function youAttack() {
     pcHealthLevel=Attack(pcHealthLevel, choixJoueur, 0);
-    setTimeout(pc, 2*1000);
+    playerHealthLevel = pc()
+    // setTimeout(pc, 2*1000);
 }
 
 function youHeal() {
     playerHealthLevel=Heal(playerHealthLevel, choixJoueur, 1);
-    setTimeout(pc, 2*1000);
+    pcHealthLevel = pc()
+    // setTimeout(pc, 2*1000);
+}
+
+function cleanText(){
+    nbrLine = 0
+    lastInfo.textContent = "";
 }
 
 attack.addEventListener("click",youAttack)
-heal.addEventListener("click",youHeal)
+heal3.addEventListener("click",youHeal)
