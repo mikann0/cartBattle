@@ -71,8 +71,18 @@ let nbrLine = 0;
 let choixJoueur;
 let choixBot;
 
+//add E3
+let imgEnd = document.querySelector(".imgEnd")
+let nameEnd = document.querySelector(".nameEnd h2")
+let resultat = document.querySelector(".div1E3 h1") 
+let cartEnd = document.querySelector(".div2E3") 
+let recommencer = document.querySelector(".recommencer")
 
-for (let i = 0; i < listCard.length; i++){
+recommencer.addEventListener("click", function() { 
+    window.location.reload();
+})
+
+for(let i = 0; i < listCard.length; i++){
     afficheCardProperties(i)
     chooseCard[i].addEventListener('click', function(){
         showCard(i)
@@ -104,6 +114,7 @@ function showCard(i){
 
     ecran1.style.display = 'none'
     ecran2.style.display = 'block'
+    ecran3.style.display = 'none'
 
     cartPc.style.backgroundColor = listCard[choixBot].bg
     cartPlayer.style.backgroundColor = listCard[choixJoueur].bg
@@ -135,7 +146,7 @@ function Attack(targetHealthLevel, cardInformation, cardIndex) {
         healthLevel[cardIndex].textContent = "0 / 100"
         bar[cardIndex].style.setProperty('--lifeWidth', '0%')
         targetHealthLevel = 0
-        // gagner(cardInformation,cardIndex)
+        gagner(cardInformation,cardIndex)
     }
 
     if(nbrLine>5)
@@ -150,8 +161,18 @@ function Attack(targetHealthLevel, cardInformation, cardIndex) {
     return targetHealthLevel
 }
 
+//add E3
 function gagner(cardInformation,cardIndex){
-    //style display block
+    ecran1.style.display = 'none'
+    ecran2.style.display = 'none'
+    ecran3.style.display = 'block'
+    nameEnd.textContent = listCard[cardInformation].name
+    imgEnd.src = listCard[cardInformation].imgCard
+    cartEnd.style.backgroundColor = listCard[cardInformation].bg
+
+    if(cardIndex==1){
+        resultat.textContent = "LOSE"  
+    }
 
 }
 
