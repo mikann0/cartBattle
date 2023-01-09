@@ -113,6 +113,17 @@ function showCard(i){
 function Attack(targetHealthLevel, cardInformation, cardIndex) {
     let randAttack = randomMinMax(listCard[cardInformation].attack[0],listCard[cardInformation].attack[1])
     let calculHealth = targetHealthLevel - randAttack
+    let isCrit = testCrit()
+    let txtCrit = "";
+
+    if(isCrit == 0){
+        randAttack = 0
+        txtCrit = "(Critique Negatif)"
+    }
+    if(isCrit == 1){
+        randAttack += 10
+        txtCrit = "(Critique Positif)"
+    }
     
     if (calculHealth > 0) {
         healthLevel[cardIndex].textContent = calculHealth + " / 100"
@@ -130,9 +141,9 @@ function Attack(targetHealthLevel, cardInformation, cardIndex) {
     if(nbrLine>5)
         cleanText()
     if(cardIndex==0)
-        lastInfo.textContent += "Joueur attaque pour "+randAttack
+        lastInfo.textContent += "Joueur attaque pour "+randAttack+" "+txtCrit
     else
-        lastInfo.textContent += "Ordinateur attaque pour "+randAttack
+        lastInfo.textContent += "Ordinateur attaque pour "+randAttack+" "+txtCrit
 
     lastInfo.textContent += '\n'
     nbrLine++
@@ -147,8 +158,19 @@ function gagner(cardInformation,cardIndex){
 
 function Heal(ownHealthLevel, cardInformation, cardIndex) {
     let randHeal = randomMinMax(listCard[cardInformation].heal[0],listCard[cardInformation].heal[1])
+    let isCrit = testCrit()
+    let txtCrit = "";
+
+    if(isCrit == 0){
+        randHeal = 0
+        txtCrit = "(Critique Negatif)"
+    }
+    if(isCrit == 1){
+        randHeal += 10
+        txtCrit = "(Critique Positif)"
+    }
+
     let calculHealth = ownHealthLevel + randHeal
-    console.log(calculHealth,"+",randHeal,"jj",cardIndex)
 
     if (calculHealth >= 100) {
         healthLevel[cardIndex].textContent = "100 / 100"
@@ -163,9 +185,9 @@ function Heal(ownHealthLevel, cardInformation, cardIndex) {
     if(nbrLine>5)
         cleanText()
     if(cardIndex==0)
-        lastInfo.textContent += "Ordinateur se soigne pour "+randHeal
+        lastInfo.textContent += "Ordinateur se soigne pour "+randHeal+" "+txtCrit
     else
-        lastInfo.textContent += "Joueur se soigne pour "+randHeal
+        lastInfo.textContent += "Joueur se soigne pour "+randHeal+" "+txtCrit
 
     lastInfo.textContent += '\n'
     nbrLine++
@@ -202,5 +224,15 @@ heal3.addEventListener("click",youHeal)
 
 
 function randomMinMax(min,max){
-    return Math.floor(Math.random()*(max-min+1)+min)
+    let nbr = Math.floor(Math.random()*(max-min+1)+min)
+    return nbr
+}
+
+function testCrit(){
+    let crit = Math.floor(Math.random()*20)
+    if(crit == 0)
+        return 0
+    if(crit == 1)
+        return 1
+    return 2
 }
