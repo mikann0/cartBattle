@@ -2,8 +2,8 @@
 let listCard = [
     {
         name : "Leader",
-        attack : 12,
-        heal : 2,
+        attack : 30,
+        heal : 0,
         imgCard : "img/Leader.png",
         bg : "rgb(190, 164, 164)"
     },
@@ -63,6 +63,13 @@ let healthLevel = document.querySelectorAll(".healthBar p")
 let attack = document.querySelector(".attack2")
 let heal3 = document.querySelector(".heal3")
 
+//add E3
+let imgEnd = document.querySelector(".imgEnd")
+let nameEnd = document.querySelector(".nameEnd h2")
+let resultat = document.querySelector(".div1E3 h1") 
+let cartEnd = document.querySelector(".div2E3") 
+
+
 let playerHealthLevel = 100
 let pcHealthLevel = 100
 
@@ -95,7 +102,7 @@ function showCard(i){
     }while (choixBot==choixJoueur)
     console.log(choixJoueur);
     console.log(choixBot);
-    
+
     charactorName[0].textContent = listCard[choixBot].name
     charactorName[1].textContent = listCard[choixJoueur].name
 
@@ -104,6 +111,8 @@ function showCard(i){
 
     ecran1.style.display = 'none'
     ecran2.style.display = 'block'
+    ecran3.style.display = 'none'
+
 
     cartPc.style.backgroundColor = listCard[choixBot].bg
     cartPlayer.style.backgroundColor = listCard[choixJoueur].bg
@@ -134,9 +143,18 @@ function Attack(targetHealthLevel, cardInformation, cardIndex) {
     nbrLine++
     return targetHealthLevel
 }
-
+//add E3
 function gagner(cardInformation,cardIndex){
-    //style display block
+    ecran1.style.display = 'none'
+    ecran2.style.display = 'none'
+    ecran3.style.display = 'block'
+    nameEnd.textContent = listCard[cardInformation].name
+    imgEnd.src = listCard[cardInformation].imgCard
+    cartEnd.style.backgroundColor = listCard[cardInformation].bg
+
+    if(cardIndex==1){
+        resultat.textContent = "LOSE"  
+    }
 
 }
 
@@ -195,3 +213,5 @@ function cleanText(){
 
 attack.addEventListener("click",youAttack)
 heal3.addEventListener("click",youHeal)
+
+
