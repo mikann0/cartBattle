@@ -56,13 +56,16 @@ const cardImg      = document.querySelectorAll('.cardImg');
 const ecran2 = document.querySelector('#ecran2');
 
 const imgVs         = document.querySelectorAll(".imgVs")
-const charactorName = document.querySelectorAll(".divName h2")
+const characterName = document.querySelectorAll(".divName h2")
 const bar           = document.querySelectorAll(".healthBar")
 const healthLevel   = document.querySelectorAll(".healthBar p")
 const attack        = document.querySelector(".attack2")
 const heal3         = document.querySelector(".heal3")
+
 const cartPc        = document.querySelector(".cartPc")
 const cartPlayer    = document.querySelector(".cartPlayer")
+const cardE2   = document.querySelectorAll('.cardE2');
+
 const lastInfo      = document.querySelector('.textLastInfo')
 
 
@@ -108,8 +111,16 @@ function showCard(i){
     console.log(choixJoueur);
     console.log(choixBot);
     
-    charactorName[0].textContent = listCard[choixBot].name
-    charactorName[1].textContent = listCard[choixJoueur].name
+
+    for (let i = 0; i < 2; i++) {
+        const element = array[i];
+        
+    }
+    characterName[0].textContent = listCard[choixBot].name
+    characterName[1].textContent = listCard[choixJoueur].name
+
+    cardE2[0].style.backgroundColor = listCard[choixBot].bg
+    cardE2[1].style.backgroundColor = listCard[choixJoueur].bg
 
     imgVs[0].src = listCard[choixBot].imgCard
     imgVs[1].src = listCard[choixJoueur].imgCard
@@ -118,8 +129,7 @@ function showCard(i){
     ecran2.style.display = 'block'
     ecran3.style.display = 'none'
 
-    cartPc.style.backgroundColor = listCard[choixBot].bg
-    cartPlayer.style.backgroundColor = listCard[choixJoueur].bg
+
 }
 
 
@@ -258,6 +268,16 @@ function testCrit(){
 
 attack.addEventListener("click",youAttack)
 heal3.addEventListener("click",youHeal)
+
 recommencer.addEventListener("click", function() { 
-    window.location.reload();
+    ecran1.style.display = 'block'
+    ecran2.style.display = 'none'
+    ecran3.style.display = 'none'
+    playerHealthLevel = 100
+    pcHealthLevel = 100
+    cleanText()
+    for (let i = 0; i < 2; i++) {
+        bar[i].style.setProperty('--lifeWidth', '100%')
+        healthLevel[i].textContent = "100 / 100"
+    }  
 })
