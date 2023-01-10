@@ -44,24 +44,36 @@ let listCard = [
     }
 ]
 
-const chooseCard = document.querySelectorAll('.card');
-const cardName = document.querySelectorAll('.cardNameTxt');
-const damageNumber = document.querySelectorAll('.damage');
-const healNumber = document.querySelectorAll('.heal');
-const cardImg = document.querySelectorAll('.cardImg');
 const ecran1 = document.querySelector('#ecran1');
+
+const chooseCard   = document.querySelectorAll('.card');
+const cardName     = document.querySelectorAll('.cardNameTxt');
+const damageNumber = document.querySelectorAll('.damage');
+const healNumber   = document.querySelectorAll('.heal');
+const cardImg      = document.querySelectorAll('.cardImg');
+
+
 const ecran2 = document.querySelector('#ecran2');
-const lastInfo = document.querySelector('.textLastInfo')
 
-let cartPc = document.querySelector(".cartPc")
-let cartPlayer = document.querySelector(".cartPlayer")
+const imgVs         = document.querySelectorAll(".imgVs")
+const charactorName = document.querySelectorAll(".divName h2")
+const bar           = document.querySelectorAll(".healthBar")
+const healthLevel   = document.querySelectorAll(".healthBar p")
+const attack        = document.querySelector(".attack2")
+const heal3         = document.querySelector(".heal3")
+const cartPc        = document.querySelector(".cartPc")
+const cartPlayer    = document.querySelector(".cartPlayer")
+const lastInfo      = document.querySelector('.textLastInfo')
 
-let imgVs = document.querySelectorAll(".imgVs")
-let charactorName = document.querySelectorAll(".divName h2")
-let bar = document.querySelectorAll(".healthBar")
-let healthLevel = document.querySelectorAll(".healthBar p")
-let attack = document.querySelector(".attack2")
-let heal3 = document.querySelector(".heal3")
+
+const ecran3 = document.querySelector('#ecran3');
+//add E3
+const imgEnd      = document.querySelector(".imgEnd")
+const nameEnd     = document.querySelector(".nameEnd h2")
+const resultat    = document.querySelector(".div1E3 h1") 
+const cartEnd     = document.querySelector(".div2E3") 
+const recommencer = document.querySelector(".recommencer")
+
 
 let playerHealthLevel = 100
 let pcHealthLevel = 100
@@ -71,16 +83,6 @@ let nbrLine = 0;
 let choixJoueur;
 let choixBot;
 
-//add E3
-let imgEnd = document.querySelector(".imgEnd")
-let nameEnd = document.querySelector(".nameEnd h2")
-let resultat = document.querySelector(".div1E3 h1") 
-let cartEnd = document.querySelector(".div2E3") 
-let recommencer = document.querySelector(".recommencer")
-
-recommencer.addEventListener("click", function() { 
-    window.location.reload();
-})
 
 for(let i = 0; i < listCard.length; i++){
     afficheCardProperties(i)
@@ -161,21 +163,6 @@ function Attack(targetHealthLevel, cardInformation, cardIndex) {
     return targetHealthLevel
 }
 
-//add E3
-function gagner(cardInformation,cardIndex){
-    ecran1.style.display = 'none'
-    ecran2.style.display = 'none'
-    ecran3.style.display = 'block'
-    nameEnd.textContent = listCard[cardInformation].name
-    imgEnd.src = listCard[cardInformation].imgCard
-    cartEnd.style.backgroundColor = listCard[cardInformation].bg
-
-    if(cardIndex==1){
-        resultat.textContent = "LOSE"  
-    }
-
-}
-
 
 function Heal(ownHealthLevel, cardInformation, cardIndex) {
     let randHeal = randomMinMax(listCard[cardInformation].heal[0],listCard[cardInformation].heal[1])
@@ -215,6 +202,21 @@ function Heal(ownHealthLevel, cardInformation, cardIndex) {
     return ownHealthLevel
 }
 
+//add E3
+function gagner(cardInformation,cardIndex){
+    ecran1.style.display = 'none'
+    ecran2.style.display = 'none'
+    ecran3.style.display = 'block'
+    nameEnd.textContent = listCard[cardInformation].name
+    imgEnd.src = listCard[cardInformation].imgCard
+    cartEnd.style.backgroundColor = listCard[cardInformation].bg
+
+    if(cardIndex==1){
+        resultat.textContent = "LOSE"  
+    }
+
+}
+
 
 function pc() {
     let number = Math.floor(Math.random() * 2 + 1)
@@ -240,10 +242,6 @@ function cleanText(){
     lastInfo.textContent = "";
 }
 
-attack.addEventListener("click",youAttack)
-heal3.addEventListener("click",youHeal)
-
-
 function randomMinMax(min,max){
     let nbr = Math.floor(Math.random()*(max-min+1)+min)
     return nbr
@@ -258,3 +256,8 @@ function testCrit(){
     return 2
 }
 
+attack.addEventListener("click",youAttack)
+heal3.addEventListener("click",youHeal)
+recommencer.addEventListener("click", function() { 
+    window.location.reload();
+})
